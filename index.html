@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Personagem Completo</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #444;
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #personagem {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            background-color: white;
+            text-align: left;
+        }
+
+        #personagem h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        #personagem p, #personagem h3 {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 8px 0;
+        }
+
+        #atributos {
+            margin-top: 10px;
+        }
+
+        #atributos h3 {
+            margin-bottom: 5px;
+            color: #4CAF50;
+        }
+
+        #atributos p {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerador de Personagem Completo</h1>
+    <button onclick="gerarPersonagem()">Gerar Personagem</button>
+    <div id="personagem">
+        <h2>Ficha do Personagem</h2>
+        <p id="nome"></p>
+        <p id="raca"></p>
+        <p id="classe"></p>
+        <p id="origem"></p>
+        <p id="poder"></p>
+        <div id="atributos"></div>
+        <p id="descricao"></p>
+    </div>
+
+    <script>
+        // Listas de características com variações
+        const nomes = ["Aramil", "Eldrin", "Fira", "Tarek", "Lyra", "Orin", "Mira", "Vulcan", "Thorin", "Soren", "Aldar", "Eira"];
+        const racas = ["Humano", "Elfo", "Anão", "Orc", "Draconiano", "Tiefling", "Meio-Elfo", "Golem", "Vampiro"];
+        const classes = ["Guerreiro", "Mago", "Arqueiro", "Clérigo", "Bardo", "Ladino", "Paladino", "Feiticeiro", "Necromante"];
+        const origens = [
+            "Aldeia pacífica nas montanhas",
+            "Cidade fortificada nas planícies",
+            "Floresta encantada ancestral",
+            "Deserto árido e místico",
+            "Templo abandonado nas terras sombrias",
+            "Caverna secreta de dragões",
+            "Ruínas de uma civilização antiga",
+            "Submundo sombrio",
+            "Palácio celestial entre as nuvens"
+        ];
+        const poderes = [
+            "Manipulação do Fogo", 
+            "Controle das Sombras", 
+            "Telepatia", 
+            "Força Sobre-humana", 
+            "Regeneração Instantânea", 
+            "Invocação de Criaturas", 
+            "Teletransporte", 
+            "Controle do Tempo", 
+            "Visão do Futuro", 
+            "Manipulação de Gelo"
+        ];
+        const atributos = ["Força", "Destreza", "Constituição", "Inteligência", "Sabedoria", "Carisma"];
+
+        function gerarPersonagem() {
+            const nome = nomes[Math.floor(Math.random() * nomes.length)];
+            const raca = racas[Math.floor(Math.random() * racas.length)];
+            const classe = classes[Math.floor(Math.random() * classes.length)];
+            const origem = origens[Math.floor(Math.random() * origens.length)];
+            const poder = poderes[Math.floor(Math.random() * poderes.length)];
+
+            // Atributos aleatórios entre 1 e 20
+            let stats = {};
+            atributos.forEach(atributo => {
+                stats[atributo] = Math.floor(Math.random() * 20) + 1;
+            });
+
+            const descricao = `${nome}, um ${classe.toLowerCase()} ${raca.toLowerCase()} oriundo de ${origem.toLowerCase()}, possui o poder de ${poder.toLowerCase()}.`;
+
+            // Exibir o personagem na página
+            document.getElementById("nome").innerText = `Nome: ${nome}`;
+            document.getElementById("raca").innerText = `Raça: ${raca}`;
+            document.getElementById("classe").innerText = `Classe: ${classe}`;
+            document.getElementById("origem").innerText = `Origem: ${origem}`;
+            document.getElementById("poder").innerText = `Poder: ${poder}`;
+            document.getElementById("descricao").innerText = `Descrição: ${descricao}`;
+
+            const atributosDiv = document.getElementById("atributos");
+            atributosDiv.innerHTML = "<h3>Atributos:</h3>";
+            for (const [key, value] of Object.entries(stats)) {
+                atributosDiv.innerHTML += `<p>${key}: ${value}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
